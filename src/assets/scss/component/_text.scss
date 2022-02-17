@@ -1,0 +1,92 @@
+.text {
+  @include font($size: $font-size-m);
+}
+
+/* SIZE */
+.text--size-x {
+  font-size: $font-size-x;
+
+  @include media-mobile-x {
+    font-size: 20px;
+  }
+}
+
+.text--size-s {
+  font-size: $font-size-s;
+}
+
+.text--size-xs {
+  font-size: $font-size-xs;
+}
+
+.text--size-xxs {
+  font-size: $font-size-xxs;
+}
+
+.text--size-xxxs {
+  font-size: $font-size-xxxs;
+}
+
+/* WEIGHT */
+.text--weight-7 {
+  font-weight: $font-weight-7;
+}
+
+.text--weight-5 {
+  font-weight: $font-weight-5;
+}
+
+.text--weight-4 {
+  font-weight: $font-weight-4;
+}
+
+/* ALIGN */
+.text--alight-l {
+  text-align: left;
+}
+
+.text--align-r {
+  text-align: right;
+}
+
+.text--align-c {
+  text-align: center;
+}
+
+/* COLOR */
+.text--color-white {
+  color: $color-5;
+}
+
+.text--color-active {
+  color: $color-8;
+}
+
+.text--color-main {
+  color: $color-1;
+}
+
+.text--color-warning {
+  color: $color-6;
+}
+
+.text--color-error {
+  color: $color-7;
+}
+
+.text--color-mute {
+  color: $color-2;
+}
+
+.text--color-light {
+  color: $color-3;
+}
+
+.text--link {
+  color: $color-8;
+  @extend %transition-2;
+
+  &:hover {
+    color: $color-9;
+  }
+}

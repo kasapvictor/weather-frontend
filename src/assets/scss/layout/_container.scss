@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  max-width: $desktop-m;
+  margin: 0 auto;
+
+  @include media-desktop-m {
+    padding: 0 30px;
+  }
+
+  @include media-desktop-s {
+    padding: 0 20px;
+  }
+}
