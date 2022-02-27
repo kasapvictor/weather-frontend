@@ -1,0 +1,132 @@
+[
+  {
+    "id": 524894,
+    "name": "Moscow",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 37.606667,
+      "lat": 55.761665
+    }
+  },
+  {
+    "id": 504341,
+    "name": "Pskov",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 28.3496,
+      "lat": 57.813599
+    }
+  },
+  {
+    "id": 1496747,
+    "name": "Novosibirsk",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 82.934441,
+      "lat": 55.041111
+    }
+  },
+  {
+    "id": 520555,
+    "name": "Nizhniy Novgorod",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 44.002048,
+      "lat": 56.328674
+    }
+  },
+  {
+    "id": 501175,
+    "name": "Rostov-na-Donu",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 39.71389,
+      "lat": 47.236389
+    }
+  },
+  {
+    "id": 498817,
+    "name": "Saint Petersburg",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 30.264168,
+      "lat": 59.894444
+    }
+  },
+  {
+    "id": 491687,
+    "name": "Smolensk",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 32.040001,
+      "lat": 54.781666
+    }
+  },
+  {
+    "id": 472045,
+    "name": "Voronezh",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 39.169998,
+      "lat": 51.666389
+    }
+  },
+  {
+    "id": 578072,
+    "name": "Belgorod",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 36.580002,
+      "lat": 50.610001
+    }
+  },
+  {
+    "id": 2026070,
+    "name": "Bryansk",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 106.84333,
+      "lat": 52.02306
+    }
+  },
+  {
+    "id": 498677,
+    "name": "Saratov",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 46.033333,
+      "lat": 51.566666
+    }
+  },
+  {
+    "id": 498698,
+    "name": "Saransk",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 45.1749,
+      "lat": 54.1838
+    }
+  },
+  {
+    "id": 500004,
+    "name": "Rybinsk",
+    "state": "",
+    "country": "RU",
+    "coord": {
+      "lon": 38.84259,
+      "lat": 58.044601
+    }
+  }
+]

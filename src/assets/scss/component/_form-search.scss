@@ -1,0 +1,13 @@
+.form-search {
+  padding-bottom: 30px;
+}
+
+.form-search__input {
+  padding: 20px;
+  font-size: $font-size-m;
+
+  /* 479 */
+  @include media-mobile-x {
+
+  }
+}

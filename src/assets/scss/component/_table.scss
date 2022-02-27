@@ -1,0 +1,66 @@
+.table {
+  border: 1px solid $color-2;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.table__header {
+  border-bottom: 1px solid $color-2;
+}
+
+.table__row {
+  display: flex;
+  border-bottom: 1px solid $color-2;
+  position: relative;
+  @extend %transition-2;
+
+  &:hover:not(.table__header-row) {
+    background-color: $color-3;
+  }
+
+  &:last-child {
+    border-bottom: none
+  }
+
+
+}
+
+.table__cell {
+  flex-basis: calc(100%/10);
+  padding: 10px;
+  border-left: 1px solid $color-2;
+
+  &:first-child {
+    flex-basis: 20%;
+    border-left: none;
+  }
+}
+
+.table__row-remove {
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: $color-7;
+  color: $color-5;
+  font-size: $font-size-x;
+  border-radius: 50%;
+  @extend %transition-2;
+}
+
+.table__row {
+  &:hover {
+    .table__row-remove {
+      opacity: .4;
+      visibility: visible;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

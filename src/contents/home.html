@@ -2,12 +2,17 @@
     <!-- search line -->
     <div class="search-line">
         <div class="container">
-            <form class="form form-search" name="form-search">
-                <label>
-                    <input class="input form__input" name="search" placeholder="Type name of city..." type="text">
+            <form class="form form-search" name="form-search" id="hacker-list">
+                <label class="label form__label form-search__label">
+                    <input class="input form__input form-search__input search"
+                           name="search"
+                           autocomplete="off"
+                           placeholder="Type name of city..." type="text">
                 </label>
 
-                <input class="button form__button form-search__submit" type="submit" value="Add">
+                <div class="search__list">
+                    <ul class="list"></ul>
+                </div>
             </form>
         </div>
     </div>
@@ -15,49 +20,61 @@
     <!-- cities table -->
     <section class="section cities">
         <div class="container">
-            <div class="table cities__table">
+
+            <div class="table cities__table" id="cities-table">
 
                 <!-- table header -->
-                <div class="table__row table__row-header">
-                    <div class="table__cell">
-                        <span class="text text--size-x text--weight-7">City</span>
-                    </div>
+                <div class="table__header" id="table-header">
+                    <div class="table__row table__header-row">
+                        <div class="table__cell">
+                            <span class="text text--size-x text--weight-7">City</span>
+                        </div>
 
-                    <div class="table__cell">
-                        <span class="text text--size-x text--weight-7">Day 1</span>
-                    </div>
+                        <div class="table__cell">
+                            <span class="text text--size-x text--weight-7">Today</span>
+                        </div>
 
-                    <div class="table__cell">
-                        <span class="text text--size-x text--weight-7">Day 2</span>
-                    </div>
+                        <div class="table__cell">
+                            <span class="text text--size-x text--weight-7">Day 1</span>
+                        </div>
 
-                    <div class="table__cell">
-                        <span class="text text--size-x text--weight-7">Day 3</span>
-                    </div>
+                        <div class="table__cell">
+                            <span class="text text--size-x text--weight-7">Day 2</span>
+                        </div>
 
-                    <div class="table__cell">
-                        <span class="text text--size-x text--weight-7">Day 4</span>
-                    </div>
+                        <div class="table__cell">
+                            <span class="text text--size-x text--weight-7">Day 3</span>
+                        </div>
 
-                    <div class="table__cell">
-                        <span class="text text--size-x text--weight-7">Day 5</span>
-                    </div>
+                        <div class="table__cell">
+                            <span class="text text--size-x text--weight-7">Day 4</span>
+                        </div>
 
-                    <div class="table__cell">
-                        <span class="text text--size-x text--weight-7">Day 6</span>
-                    </div>
+                        <div class="table__cell">
+                            <span class="text text--size-x text--weight-7">Day 5</span>
+                        </div>
 
-                    <div class="table__cell">
-                        <span class="text text--size-x text--weight-7">Day 7</span>
+                        <div class="table__cell">
+                            <span class="text text--size-x text--weight-7">Day 6</span>
+                        </div>
+
+                        <div class="table__cell">
+                            <span class="text text--size-x text--weight-7">Day 7</span>
+                        </div>
                     </div>
                 </div>
 
                 <!--table body -->
-                <div class="table__body">
+                <div class="table__body" id="table-body">
                     <div class="table__row">
                         <div class="table__cell">
-                            <span class="text text--size-x">Chikago</span>
+                            <span class="text text--size-x">Chicago</span>
                         </div>
+
+                        <div class="table__cell">
+                            <span class="text text--size-x">+1</span>
+                        </div>
+
                         <div class="table__cell">
                             <span class="text text--size-x">+1</span>
                         </div>
@@ -79,8 +96,12 @@
                         <div class="table__cell">
                             <span class="text text--size-x">+7</span>
                         </div>
+
+                        <button class="table__row-remove">&times;</button>
                     </div>
                 </div>
+            </div>
+        </div>
     </section>
 </main>
 

@@ -24,6 +24,9 @@
     - prettier
     - jest
     - axios
+    - list.js
+    - on-change
+    - dotenv
 
 ---
 ## Start 
@@ -62,5 +65,19 @@ Manual ParcelJS - https://parceljs.org/getting-started/webapp
 }
 ```
 
+----
 
+### Sources 
 
+> list.js
+> 
+> 
+> https://listjs.com/overview/download/
+
+> on-change
+> 
+> https://github.com/sindresorhus/on-change
+
+> dotenv
+> 
+> https://github.com/motdotla/dotenv

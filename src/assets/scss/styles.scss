@@ -8,7 +8,11 @@
 /* COMPONENTS */
 @import "component/title";
 @import "component/text";
+@import "component/input";
+@import "component/form-search";
+@import "component/table";
 
 /* LAYOUTS */
 @import "layout/container";
 @import "layout/header";
+@import "layout/cities";

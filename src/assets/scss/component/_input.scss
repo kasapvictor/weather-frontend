@@ -1,0 +1,19 @@
+.input {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid $color-2;
+  outline: none;
+  @extend %transition-2;
+
+  /* 479 */
+  @include media-mobile-x {
+
+  }
+}
+
+.input:active, .input:focus {
+  border-color: $color-8;
+}
+
+
