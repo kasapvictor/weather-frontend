@@ -38,7 +38,7 @@ const updateDataOfCities = async (state, config) => {
 			const url = buildUrl(config, lat, lon);
 			const dataOfCity = await apiDataOfCity(url);
 			
-			const currentTemp = dataOfCity.current.temp;// °С
+			const currentTemp = dataOfCity.current.temp;
 			const currentIco = dataOfCity.current.weather[0].icon;
 			const current = {
 				temp: currentTemp,
@@ -52,7 +52,8 @@ const updateDataOfCities = async (state, config) => {
 			});
 			
 			
-			state.data = [...state.data,
+			state.weather = [
+				...state.weather,
 				{
 					name: findCity.name,
 					data: [{...current}, ...daily],
@@ -100,26 +101,56 @@ const renderTableHeader = (state, elements) => {
 	headerWrapper.insertAdjacentHTML('afterbegin', row);
 };
 
-const renderTableBody = async (state, watchedState, elements, config) => {
-	const row = document.createElement('div');
-	row.classList.add('table__row');
+const renderTableBody = (state, watchedState, elements) => {
 	
-	const cell = (data) => `<div class="table__cell"><span class="text text--size-x">${data}</span></div>`;
-	const cities = state.cities;
+	elements.table.body.innerHTML = '';
 	
-	const html = cities.map(async (city) => {
-		// сформировать row с днями погоды
-	});
+	const cell = (data, ico = '') => {
+		const tableCell = document.createElement('div');
+		tableCell.classList.add('table__cell');
+		
+		const tempText = document.createElement('span');
+		tempText.classList.add('text', 'text--size-x');
+		tempText.innerText = data;
+		
+		tableCell.append(tempText);
+		
+		if (ico !== '') {
+			const icoWeather = document.createElement('img');
+			icoWeather.classList.add('img', 'ico', 'table__img');
+			icoWeather.src = ico;
+			tableCell.append(icoWeather);
+		}
+		// TODO округлить десятки температуры
+		// TODO добавить кнопку удаления строки
+		
+		return tableCell;
+	};
 	
-	console.log(state);
-	
+	const rows = state.weather.map((item) => {
+		const row = document.createElement('div');
+		row.classList.add('table__row');
+		
+		const cellName = cell(item.name);
+		
+		const cells = item.data.map((dayWeather) => {
+			const icoSrc = `https://openweathermap.org/img/wn/${dayWeather.ico}.png`;
+			const temp = `${dayWeather.temp}°C`;
+			return cell(temp, icoSrc);
+		});
+		
+		row.append(cellName, ...cells);
+		return row;
+	})
+		.map((item) => elements.table.body.append(item));
 };
 
 const renderTable = (state, watchedState, elements, config) => {
 	
 	// +++ 1 - сформировать шапку таблицы с датами (8 дней)
-	// 2 - получить данные о погоде из городов в стейте
-	// 3 - вывести в таблицы данные погоды
+	// +++ 2 - получить данные о погоде из городов в стейте
+	// +++ 3 - вывести в таблицы данные погоды
+	// 4 - добавить кнопку удаления строки
 	
 	if (!state.ui.tableHeader) {
 		renderTableHeader(state, elements);
@@ -159,7 +190,7 @@ export default () => {
 		ui: {
 			tableHeader: 0,
 		},
-		data: [],
+		weather: [],
 	};
 	
 	const watchedState = onChange(state, (path, value, prev) => {
