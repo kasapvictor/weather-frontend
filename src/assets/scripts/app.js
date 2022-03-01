@@ -51,7 +51,6 @@ const updateDataOfCities = async (state, config) => {
 				return {temp, ico};
 			});
 			
-			
 			state.weather = [
 				...state.weather,
 				{
@@ -79,9 +78,21 @@ const getDate = (numberOfDay = 0) => { // 26.02.22
 	);
 };
 
-const renderTableHeader = (state, elements) => {
+const rowRemove = (button, state, watchedState) => {
+	const cityName = button.dataset.removeCity;
+	const rowOfCity = button.closest(`[data-row-city="${cityName}"]`);
+	
+	const cities = [...state.cities];
+	const cityIndexOf = cities.indexOf(cityName);
+	
+	cities.splice(cityIndexOf, 1);
+	watchedState.cities = cities;
+	rowOfCity.remove();
+};
+
+const renderTableHeader = (state, elements, config) => {
 	const headerWrapper = elements.table.header;
-	const emptyArray = new Array(8).fill(0);
+	const emptyArray = new Array(config.days).fill(0);
 	
 	const cell = (date) => ` <div class="table__cell">
                       			<span class="text text--size-x text--weight-7 text--size-s">${date}</span>
@@ -105,41 +116,49 @@ const renderTableBody = (state, watchedState, elements) => {
 	
 	elements.table.body.innerHTML = '';
 	
-	const cell = (data, ico = '') => {
+	const cell = (data, ico = '', textCls='text--size-x') => {
 		const tableCell = document.createElement('div');
 		tableCell.classList.add('table__cell');
 		
 		const tempText = document.createElement('span');
-		tempText.classList.add('text', 'text--size-x');
+		tempText.classList.add('text', textCls);
 		tempText.innerText = data;
 		
 		tableCell.append(tempText);
 		
 		if (ico !== '') {
 			const icoWeather = document.createElement('img');
-			icoWeather.classList.add('img', 'ico', 'table__img');
+			icoWeather.classList.add('img', 'table__img');
 			icoWeather.src = ico;
 			tableCell.append(icoWeather);
 		}
-		// TODO округлить десятки температуры
-		// TODO добавить кнопку удаления строки
 		
 		return tableCell;
 	};
 	
+	// ROWS
 	const rows = state.weather.map((item) => {
 		const row = document.createElement('div');
 		row.classList.add('table__row');
+		row.dataset.rowCity = item.name.toLowerCase();
 		
 		const cellName = cell(item.name);
 		
 		const cells = item.data.map((dayWeather) => {
 			const icoSrc = `https://openweathermap.org/img/wn/${dayWeather.ico}.png`;
-			const temp = `${dayWeather.temp}°C`;
-			return cell(temp, icoSrc);
+			const temp = `${dayWeather.temp.toFixed(1)}°C`;
+			return cell(temp, icoSrc, 'text--size-s');
 		});
 		
-		row.append(cellName, ...cells);
+		// DELETE BUTTON
+		const button = document.createElement('button');
+		button.dataset.removeCity = item.name.toLowerCase();
+		button.classList.add('table__row-remove');
+		button.innerHTML = '&times;';
+		button.addEventListener('click', () => rowRemove(button, state, watchedState));
+		
+		row.append(cellName, ...cells, button);
+		
 		return row;
 	})
 		.map((item) => elements.table.body.append(item));
@@ -150,10 +169,10 @@ const renderTable = (state, watchedState, elements, config) => {
 	// +++ 1 - сформировать шапку таблицы с датами (8 дней)
 	// +++ 2 - получить данные о погоде из городов в стейте
 	// +++ 3 - вывести в таблицы данные погоды
-	// 4 - добавить кнопку удаления строки
+	// +++ 4 - добавить кнопку удаления строки
 	
 	if (!state.ui.tableHeader) {
-		renderTableHeader(state, elements);
+		renderTableHeader(state, elements, config, );
 	}
 	
 	renderTableBody(state, watchedState, elements, config);
@@ -175,7 +194,7 @@ export default () => {
 	const config = {
 		interval: 5,
 		pause: 5 * 60,
-		days: 8,
+		days: 9,
 		api: {
 			url: 'https://api.openweathermap.org/data/2.5/onecall?',
 			appid: `appid=${process.env.SECRET_KEY}`,
@@ -194,10 +213,13 @@ export default () => {
 	};
 	
 	const watchedState = onChange(state, (path, value, prev) => {
+
 		updateDataOfCities(state, config)
 			.then(() => {
 				render(state, watchedState, elements, config);
+
 				state.ui.tableHeader = 1;
+				state.weather = [];
 			}
 		);
 	});

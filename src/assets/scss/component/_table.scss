@@ -1,4 +1,6 @@
 .table {
+  width: 100%;
+  min-width: 1160px;
   border: 1px solid $color-2;
   border-radius: 6px;
   overflow: hidden;
@@ -21,8 +23,6 @@
   &:last-child {
     border-bottom: none
   }
-
-
 }
 
 .table__cell {
@@ -46,13 +46,14 @@
   visibility: hidden;
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 5px;
   transform: translateY(-50%);
   background-color: $color-7;
   color: $color-5;
   font-size: $font-size-x;
   border-radius: 50%;
   @extend %transition-2;
+  z-index: 20;
 }
 
 .table__row {
@@ -70,9 +71,9 @@
 
 .table__img {
   position: absolute;
-  width: 48px;
-  height: 48px;
-  right: 0;
-  top: 30%;
+  width: 32px;
+  height: 32px;
+  right: 20px;
+  top: 50%;
   transform: translateY(-50%);
 }
