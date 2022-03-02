@@ -12,7 +12,7 @@ rm-dist:
 
 # проверка ошибок + исправление
 lint:
-	npx eslint --fix ./src/scripts
+	npx eslint --fix ./src
 
 # исправление отступов и переносов
 pretty:

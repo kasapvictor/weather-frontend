@@ -1,6 +1,5 @@
 import '../scss/styles.scss';
-import './searchList.js';
+import './renderSearch.js';
 import app from './app.js';
-
 
 app();
