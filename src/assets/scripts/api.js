@@ -12,6 +12,8 @@ const apiDataOfCity = async (url) => {
       return error.response;
     }
   }
+
+  return true;
 };
 
 export default apiDataOfCity;

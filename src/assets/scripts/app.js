@@ -4,8 +4,6 @@ import renderSearch from './renderSearch';
 import renderTable from './renderTable';
 import apiDataOfCity from './api';
 
-console.log(cityList);
-
 const buildUrl = (config, lat, lon) => {
   const baseUtl = config.api.url;
   const appId = config.api.appid;
@@ -15,58 +13,68 @@ const buildUrl = (config, lat, lon) => {
 };
 
 const updateDataOfCities = async (state, config) => {
-  const cities = state.cities.sort();
-  
-  return new Promise(async (resolve) => {
-    for (const city of cities) {
-      const findCity = cityList.find((item) => item.id === city);
-      const lon = `&lon=${findCity.coord.lon}`;
-      const lat = `&lat=${findCity.coord.lat}`;
-      const url = buildUrl(config, lat, lon);
-      const dataOfCity = await apiDataOfCity(url);
-      
-      const currentTemp = dataOfCity.current.temp;
-      const currentIco = dataOfCity.current.weather[0].icon;
-      const current = {
-        temp: currentTemp,
-        ico: currentIco,
-      };
-      
-      const daily = dataOfCity.daily.map((day) => {
-        const temp = day.temp.day;
-        const ico = day.weather[0].icon;
-        return { temp, ico };
-      });
-      
-      state.weather = [
-        ...state.weather,
-        {
-          id: findCity.id,
-          name: findCity.name,
-          data: [{ ...current }, ...daily],
-        }];
-    }
-  
-    // SORT CITIES BY NAME
-    state.weather.sort(function (a, b) {
-      if (a.name > b.name) {
-        return 1;
-      }
+  const stateData = state;
+  const cities = stateData.cities.sort();
 
-      if (a.name < b.name) {
-        return -1;
-      }
+  for (const city of cities) {
+    const findCity = cityList.find((item) => item.id === city);
+    const lon = `&lon=${findCity.coord.lon}`;
+    const lat = `&lat=${findCity.coord.lat}`;
+    const url = buildUrl(config, lat, lon);
+    const dataOfCity = await apiDataOfCity(url);
 
-      return 0;
+    const currentTemp = dataOfCity.current.temp;
+    const currentIco = dataOfCity.current.weather[0].icon;
+    const current = {
+      temp: currentTemp,
+      ico: currentIco,
+    };
+
+    const daily = dataOfCity.daily.map((day) => {
+      const temp = day.temp.day;
+      const ico = day.weather[0].icon;
+      return { temp, ico };
     });
-    
-    resolve();
+
+    stateData.weather = [
+      ...stateData.weather,
+      {
+        id: findCity.id,
+        name: findCity.name,
+        data: [{ ...current }, ...daily],
+      }];
+  }
+
+  // SORT CITIES BY NAME
+  stateData.weather.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+
+    if (a.name < b.name) {
+      return -1;
+    }
+
+    return 0;
   });
 };
 
 const render = (state, watchedState, elements, config) => {
   renderTable(state, watchedState, elements, config);
   renderSearch(state, watchedState, elements, config);
+};
+
+const searchListHandler = (e, watchedState) => {
+  const el = e.target;
+  const watcherState = watchedState;
+  const isCity = el.classList.contains('city');
+
+  if (isCity) {
+    const parent = el.closest('li[data-city-id]');
+    const id = parent.dataset.cityId;
+
+    watcherState.cities = [...watcherState.cities, Number(id)];
+  }
 };
 
 export default () => {
@@ -79,8 +87,7 @@ export default () => {
   };
 
   const config = {
-    interval: 5,
-    pause: 5 * 60,
+    interval: 5 * 60 * 1000,
     days: 9,
     api: {
       url: 'https://api.openweathermap.org/data/2.5/onecall?',
@@ -111,20 +118,14 @@ export default () => {
     }
   });
 
-  watchedState.lastUpdate = Date.now();
-  
   // FORM SEARCH
-  const formSearch = elements.formSearch;
+  const { formSearch } = elements;
   formSearch.addEventListener('submit', (e) => e.preventDefault());
-  formSearch.addEventListener('click', (e) => {
-    const el = e.target;
-    const isCity = el.classList.contains('city');
-    
-    if (isCity) {
-      const parent = el.closest("li[data-city-id]");
-      const id = parent.dataset.cityId;
+  formSearch.addEventListener('click', (e) => searchListHandler(e, watchedState));
 
-      watchedState.cities = [...watchedState.cities, Number(id)];
-    }
-  });
+  watchedState.lastUpdate = Date.now();
+
+  setInterval(() => {
+    watchedState.lastUpdate = Date.now();
+  }, config.interval);
 };

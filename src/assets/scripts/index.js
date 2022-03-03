@@ -1,5 +1,5 @@
 import '../scss/styles.scss';
-import './renderSearch.js';
-import app from './app.js';
+import './renderSearch';
+import app from './app';
 
 app();

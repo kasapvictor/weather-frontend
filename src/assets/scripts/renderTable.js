@@ -15,14 +15,16 @@ const rowRemove = (button, state, watchedState) => {
   const watched = watchedState;
   const cityId = button.dataset.removeCity;
   const rowOfCity = button.closest(`[data-row-city="${cityId}"]`);
-  
+
   const cities = [...state.cities];
   const cityIndexOf = cities.indexOf(Number(cityId));
 
-  cities.splice(cityIndexOf, 1);
-  rowOfCity.remove();
-  
-  watched.cities = cities;
+  if (cityIndexOf >= 0) {
+    cities.splice(cityIndexOf, 1);
+    rowOfCity.remove();
+
+    watched.cities = cities;
+  }
 };
 
 const renderTableHeader = (state, elements, config) => {
@@ -74,7 +76,7 @@ const renderTableBody = (state, watchedState, elements) => {
     const row = document.createElement('div');
     row.classList.add('table__row');
     row.dataset.rowCity = item.id;
-    
+
     const cellName = cell(item.name);
 
     const cells = item.data.map((dayWeather) => {
@@ -98,7 +100,6 @@ const renderTableBody = (state, watchedState, elements) => {
 };
 
 const renderTable = (state, watchedState, elements, config) => {
-  
   if (!state.ui.tableHeader) {
     renderTableHeader(state, elements, config);
   }
