@@ -13,15 +13,16 @@ const getDate = (numberOfDay = 0) => { // 26.02.22
 
 const rowRemove = (button, state, watchedState) => {
   const watched = watchedState;
-  const cityName = button.dataset.removeCity;
-  const rowOfCity = button.closest(`[data-row-city="${cityName}"]`);
-
+  const cityId = button.dataset.removeCity;
+  const rowOfCity = button.closest(`[data-row-city="${cityId}"]`);
+  
   const cities = [...state.cities];
-  const cityIndexOf = cities.indexOf(cityName);
+  const cityIndexOf = cities.indexOf(Number(cityId));
 
   cities.splice(cityIndexOf, 1);
-  watched.cities = cities;
   rowOfCity.remove();
+  
+  watched.cities = cities;
 };
 
 const renderTableHeader = (state, elements, config) => {
@@ -72,8 +73,8 @@ const renderTableBody = (state, watchedState, elements) => {
   state.weather.map((item) => {
     const row = document.createElement('div');
     row.classList.add('table__row');
-    row.dataset.rowCity = item.name.toLowerCase();
-
+    row.dataset.rowCity = item.id;
+    
     const cellName = cell(item.name);
 
     const cells = item.data.map((dayWeather) => {
@@ -84,7 +85,7 @@ const renderTableBody = (state, watchedState, elements) => {
 
     // DELETE BUTTON
     const button = document.createElement('button');
-    button.dataset.removeCity = item.name.toLowerCase();
+    button.dataset.removeCity = item.id;
     button.classList.add('table__row-remove');
     button.innerHTML = '&times;';
     button.addEventListener('click', () => rowRemove(button, state, watchedState));
@@ -97,13 +98,7 @@ const renderTableBody = (state, watchedState, elements) => {
 };
 
 const renderTable = (state, watchedState, elements, config) => {
-  // +++ 1 - сформировать шапку таблицы с датами (8 дней)
-  // +++ 2 - получить данные о погоде из городов в стейте
-  // +++ 3 - вывести в таблицы данные погоды
-  // +++ 4 - добавить кнопку удаления строки
-  // +++ 5 - раскидать скрипты по файлам
-  // 6 - добавит возможность поиска города и добавления его в таблицу
-
+  
   if (!state.ui.tableHeader) {
     renderTableHeader(state, elements, config);
   }

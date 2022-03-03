@@ -1,5 +1,5 @@
 .form-search {
-  padding-bottom: 30px;
+  position: relative;
 }
 
 .form-search__input {
@@ -9,5 +9,33 @@
   /* 479 */
   @include media-mobile-x {
 
+  }
+}
+
+.search__list {
+  width: 100%;
+  max-height: 200px;
+  border: 1px solid $color-2;
+  border-radius: 6px;
+  @extend %transition-2;
+
+  overflow: auto;
+  background-color: $color-5;
+
+  position: absolute;
+  top: 60px;
+
+  opacity: 0;
+  visibility: hidden;
+  z-index: -10;
+}
+
+.form-search {
+  &:hover {
+    .search__list {
+      opacity: 1;
+      visibility: visible;
+      z-index: 10;
+    }
   }
 }

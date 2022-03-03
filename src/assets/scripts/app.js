@@ -41,6 +41,7 @@ const updateDataOfCities = async (state, config) => {
       state.weather = [
         ...state.weather,
         {
+          id: findCity.id,
           name: findCity.name,
           data: [{ ...current }, ...daily],
         }];
@@ -51,11 +52,11 @@ const updateDataOfCities = async (state, config) => {
       if (a.name > b.name) {
         return 1;
       }
-      
+
       if (a.name < b.name) {
         return -1;
       }
-      
+
       return 0;
     });
     
@@ -99,13 +100,15 @@ export default () => {
   };
 
   const watchedState = onChange(state, (path, value, prev) => {
-    updateDataOfCities(state, config)
-      .then(() => {
-        render(state, watchedState, elements, config);
+    if (path === 'lastUpdate' || path === 'cities') {
+      updateDataOfCities(state, config)
+        .then(() => {
+          render(state, watchedState, elements, config);
 
-        state.ui.tableHeader = 1;
-        state.weather = [];
-      });
+          state.ui.tableHeader = 1;
+          state.weather = [];
+        });
+    }
   });
 
   watchedState.lastUpdate = Date.now();
@@ -123,5 +126,5 @@ export default () => {
 
       watchedState.cities = [...watchedState.cities, Number(id)];
     }
-  })
+  });
 };

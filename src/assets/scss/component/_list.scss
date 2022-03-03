@@ -1,0 +1,14 @@
+.list {
+  padding: 0;
+}
+
+.list__item {
+  padding: 10px 20px;
+
+  cursor: pointer;
+  @extend %transition-2;
+
+  &:hover {
+    color: $color-8;
+  }
+}
