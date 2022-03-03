@@ -2,6 +2,8 @@
 
 https://kasapvictor.github.io/weather-frontend/dist
 
+----
+
 # Task
 
 Создать сайт, выводящий погоду в определенных (на Ваш выбор) городах.
