@@ -1,13 +1,14 @@
-const getDate = (numberOfDay = 0) => { // 26.02.22
+const getDate = (numberOfDay = 0) => {
+  // 26.02.22
   const today = new Date();
   const nextDay = new Date(today);
   const date = nextDay.setDate(nextDay.getDate() + numberOfDay); // 1645974081243
   const newDate = new Date(date);
 
-  return newDate.toLocaleDateString('RU', {
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
+  return newDate.toLocaleDateString("RU", {
+    year: "2-digit",
+    month: "2-digit",
+    day: "2-digit",
   });
 };
 
@@ -34,7 +35,7 @@ const renderTableHeader = (state, elements, config) => {
   const cell = (date) => ` <div class="table__cell">
   <span class="text text--size-x text--weight-7 text--size-s">${date}</span>
   </div>`;
-  const cells = emptyArray.map((item, index) => cell(getDate(index))).join('');
+  const cells = emptyArray.map((item, index) => cell(getDate(index))).join("");
 
   const row = `<div class="table__row table__header-row">
   <div class="table__cell">
@@ -43,27 +44,27 @@ const renderTableHeader = (state, elements, config) => {
   ${cells}
   </div>`;
 
-  headerWrapper.innerHTML = '';
-  headerWrapper.insertAdjacentHTML('afterbegin', row);
+  headerWrapper.innerHTML = "";
+  headerWrapper.insertAdjacentHTML("afterbegin", row);
 };
 
 const renderTableBody = (state, watchedState, elements) => {
   const tableBody = elements.table.body;
-  tableBody.innerHTML = '';
+  tableBody.innerHTML = "";
 
-  const cell = (data, ico = '', textCls = 'text--size-x') => {
-    const tableCell = document.createElement('div');
-    tableCell.classList.add('table__cell');
+  const cell = (data, ico = "", textCls = "text--size-x") => {
+    const tableCell = document.createElement("div");
+    tableCell.classList.add("table__cell");
 
-    const tempText = document.createElement('span');
-    tempText.classList.add('text', textCls);
+    const tempText = document.createElement("span");
+    tempText.classList.add("text", textCls);
     tempText.innerText = data;
 
     tableCell.append(tempText);
 
-    if (ico !== '') {
-      const icoWeather = document.createElement('img');
-      icoWeather.classList.add('img', 'table__img');
+    if (ico !== "") {
+      const icoWeather = document.createElement("img");
+      icoWeather.classList.add("img", "table__img");
       icoWeather.src = ico;
       tableCell.append(icoWeather);
     }
@@ -72,30 +73,33 @@ const renderTableBody = (state, watchedState, elements) => {
   };
 
   // ROWS
-  state.weather.map((item) => {
-    const row = document.createElement('div');
-    row.classList.add('table__row');
-    row.dataset.rowCity = item.id;
+  state.weather
+    .map((item) => {
+      const row = document.createElement("div");
+      row.classList.add("table__row");
+      row.dataset.rowCity = item.id;
 
-    const cellName = cell(item.name);
+      const cellName = cell(item.name);
 
-    const cells = item.data.map((dayWeather) => {
-      const icoSrc = `https://openweathermap.org/img/wn/${dayWeather.ico}.png`;
-      const temp = `${dayWeather.temp.toFixed(1)}°C`;
-      return cell(temp, icoSrc, 'text--size-s');
-    });
+      const cells = item.data.map((dayWeather) => {
+        const icoSrc = `https://openweathermap.org/img/wn/${dayWeather.ico}.png`;
+        const temp = `${dayWeather.temp.toFixed(1)}°C`;
+        return cell(temp, icoSrc, "text--size-s");
+      });
 
-    // DELETE BUTTON
-    const button = document.createElement('button');
-    button.dataset.removeCity = item.id;
-    button.classList.add('table__row-remove');
-    button.innerHTML = '&times;';
-    button.addEventListener('click', () => rowRemove(button, state, watchedState));
+      // DELETE BUTTON
+      const button = document.createElement("button");
+      button.dataset.removeCity = item.id;
+      button.classList.add("table__row-remove");
+      button.innerHTML = "&times;";
+      button.addEventListener("click", () =>
+        rowRemove(button, state, watchedState)
+      );
 
-    row.append(cellName, ...cells, button);
+      row.append(cellName, ...cells, button);
 
-    return row;
-  })
+      return row;
+    })
     .map((item) => tableBody.append(item));
 };
 

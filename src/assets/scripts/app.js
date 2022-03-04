@@ -1,8 +1,8 @@
-import onChange from 'on-change';
-import cityList from './city.list.json';
-import renderSearch from './renderSearch';
-import renderTable from './renderTable';
-import apiDataOfCity from './api';
+import onChange from "on-change";
+import cityList from "./city.list.json";
+import renderSearch from "./renderSearch";
+import renderTable from "./renderTable";
+import apiDataOfCity from "./api";
 
 const buildUrl = (config, lat, lon) => {
   const baseUtl = config.api.url;
@@ -42,7 +42,8 @@ const updateDataOfCities = async (state, config) => {
         id: findCity.id,
         name: findCity.name,
         data: [{ ...current }, ...daily],
-      }];
+      },
+    ];
   }
 
   // SORT CITIES BY NAME
@@ -67,10 +68,10 @@ const render = (state, watchedState, elements, config) => {
 const searchListHandler = (e, watchedState) => {
   const el = e.target;
   const watcherState = watchedState;
-  const isCity = el.classList.contains('city');
+  const isCity = el.classList.contains("city");
 
   if (isCity) {
-    const parent = el.closest('li[data-city-id]');
+    const parent = el.closest("li[data-city-id]");
     const id = parent.dataset.cityId;
 
     watcherState.cities = [...watcherState.cities, Number(id)];
@@ -79,10 +80,10 @@ const searchListHandler = (e, watchedState) => {
 
 export default () => {
   const elements = {
-    formSearch: document['form-search'],
+    formSearch: document["form-search"],
     table: {
-      header: document.querySelector('#table-header'),
-      body: document.querySelector('#table-body'),
+      header: document.querySelector("#table-header"),
+      body: document.querySelector("#table-body"),
     },
   };
 
@@ -90,10 +91,10 @@ export default () => {
     interval: 5 * 60 * 1000,
     days: 9,
     api: {
-      url: 'https://api.openweathermap.org/data/2.5/onecall?',
+      url: "https://api.openweathermap.org/data/2.5/onecall?",
       appid: `appid=${process.env.SECRET_KEY}`,
-      exclude: '&exclude=minutely,hourly',
-      units: '&units=metric',
+      exclude: "&exclude=minutely,hourly",
+      units: "&units=metric",
     },
   };
 
@@ -107,21 +108,22 @@ export default () => {
   };
 
   const watchedState = onChange(state, (path, value, prev) => {
-    if (path === 'lastUpdate' || path === 'cities') {
-      updateDataOfCities(state, config)
-        .then(() => {
-          render(state, watchedState, elements, config);
+    if (path === "lastUpdate" || path === "cities") {
+      updateDataOfCities(state, config).then(() => {
+        render(state, watchedState, elements, config);
 
-          state.ui.tableHeader = 1;
-          state.weather = [];
-        });
+        state.ui.tableHeader = 1;
+        state.weather = [];
+      });
     }
   });
 
   // FORM SEARCH
   const { formSearch } = elements;
-  formSearch.addEventListener('submit', (e) => e.preventDefault());
-  formSearch.addEventListener('click', (e) => searchListHandler(e, watchedState));
+  formSearch.addEventListener("submit", (e) => e.preventDefault());
+  formSearch.addEventListener("click", (e) =>
+    searchListHandler(e, watchedState)
+  );
 
   watchedState.lastUpdate = Date.now();
 
