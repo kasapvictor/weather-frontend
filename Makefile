@@ -12,11 +12,11 @@ rm-dist:
 
 # проверка ошибок + исправление
 lint:
-	npx eslint --fix ./src
+	npx eslint --fix ./src/assets/scripts
 
 # исправление отступов и переносов
 pretty:
-	npx prettier --write ./src/scss && npx prettier --write ./src/scripts
+	npx prettier --write ./src/assets/scss && npx prettier --write ./src/assets/scripts
 
 test: # тест скрипта
 	npx jest

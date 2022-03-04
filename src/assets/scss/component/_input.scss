@@ -8,12 +8,10 @@
 
   /* 479 */
   @include media-mobile-x {
-
   }
 }
 
-.input:active, .input:focus {
+.input:active,
+.input:focus {
   border-color: $color-8;
 }
-
-

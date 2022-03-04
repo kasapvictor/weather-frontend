@@ -1,4 +1,5 @@
-const getDate = (numberOfDay = 0) => { // 26.02.22
+const getDate = (numberOfDay = 0) => {
+  // 26.02.22
   const today = new Date();
   const nextDay = new Date(today);
   const date = nextDay.setDate(nextDay.getDate() + numberOfDay); // 1645974081243
@@ -72,30 +73,31 @@ const renderTableBody = (state, watchedState, elements) => {
   };
 
   // ROWS
-  state.weather.map((item) => {
-    const row = document.createElement('div');
-    row.classList.add('table__row');
-    row.dataset.rowCity = item.id;
+  state.weather
+    .map((item) => {
+      const row = document.createElement('div');
+      row.classList.add('table__row');
+      row.dataset.rowCity = item.id;
 
-    const cellName = cell(item.name);
+      const cellName = cell(item.name);
 
-    const cells = item.data.map((dayWeather) => {
-      const icoSrc = `https://openweathermap.org/img/wn/${dayWeather.ico}.png`;
-      const temp = `${dayWeather.temp.toFixed(1)}°C`;
-      return cell(temp, icoSrc, 'text--size-s');
-    });
+      const cells = item.data.map((dayWeather) => {
+        const icoSrc = `https://openweathermap.org/img/wn/${dayWeather.ico}.png`;
+        const temp = `${dayWeather.temp.toFixed(1)}°C`;
+        return cell(temp, icoSrc, 'text--size-s');
+      });
 
-    // DELETE BUTTON
-    const button = document.createElement('button');
-    button.dataset.removeCity = item.id;
-    button.classList.add('table__row-remove');
-    button.innerHTML = '&times;';
-    button.addEventListener('click', () => rowRemove(button, state, watchedState));
+      // DELETE BUTTON
+      const button = document.createElement('button');
+      button.dataset.removeCity = item.id;
+      button.classList.add('table__row-remove');
+      button.innerHTML = '&times;';
+      button.addEventListener('click', () => rowRemove(button, state, watchedState));
 
-    row.append(cellName, ...cells, button);
+      row.append(cellName, ...cells, button);
 
-    return row;
-  })
+      return row;
+    })
     .map((item) => tableBody.append(item));
 };
 

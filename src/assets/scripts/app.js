@@ -42,7 +42,8 @@ const updateDataOfCities = async (state, config) => {
         id: findCity.id,
         name: findCity.name,
         data: [{ ...current }, ...daily],
-      }];
+      },
+    ];
   }
 
   // SORT CITIES BY NAME
@@ -108,13 +109,12 @@ export default () => {
 
   const watchedState = onChange(state, (path, value, prev) => {
     if (path === 'lastUpdate' || path === 'cities') {
-      updateDataOfCities(state, config)
-        .then(() => {
-          render(state, watchedState, elements, config);
+      updateDataOfCities(state, config).then(() => {
+        render(state, watchedState, elements, config);
 
-          state.ui.tableHeader = 1;
-          state.weather = [];
-        });
+        state.ui.tableHeader = 1;
+        state.weather = [];
+      });
     }
   });
 

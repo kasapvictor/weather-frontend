@@ -21,12 +21,12 @@
   }
 
   &:last-child {
-    border-bottom: none
+    border-bottom: none;
   }
 }
 
 .table__cell {
-  flex-basis: calc(100%/10);
+  flex-basis: calc(100% / 10);
   display: flex;
   align-items: center;
   padding: 10px;
@@ -59,7 +59,7 @@
 .table__row {
   &:hover {
     .table__row-remove {
-      opacity: .4;
+      opacity: 0.4;
       visibility: visible;
 
       &:hover {
