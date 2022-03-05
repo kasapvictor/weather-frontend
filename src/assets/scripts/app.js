@@ -108,7 +108,11 @@ export default () => {
   };
 
   const watchedState = onChange(state, (path, value, prev) => {
+<<<<<<< HEAD
     if (path === "lastUpdate" || path === "cities") {
+=======
+    if (path === 'lastUpdate' || path === 'cities') {
+>>>>>>> 916eff971efcba0ccc94326dd4fb2cd17710fc6b
       updateDataOfCities(state, config).then(() => {
         render(state, watchedState, elements, config);
 

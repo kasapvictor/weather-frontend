@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check Remove Row 1`] = `
+<div>
+  <div
+    class="table__body"
+    id="table-body"
+  >
+    
+    
+    
+    
+    <div
+      class="table__row"
+      data-row-city="1496747"
+    >
+      
+        
+      <button
+        class="table__row-remove"
+        data-remove-city="1496747"
+        data-testid="1496747"
+      >
+        ×
+      </button>
+      
+    
+    </div>
+    
+    
+    <div
+      class="table__row"
+      data-row-city="504341"
+    >
+      
+        
+      <button
+        class="table__row-remove"
+        data-remove-city="504341"
+      >
+        ×
+      </button>
+      
+    
+    </div>
+    
+
+  </div>
+  
+
+</div>
+`;
