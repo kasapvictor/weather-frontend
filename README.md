@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 7fe2f90269d5e680cc21db264d2d19ba95309dcd
 # Link
 
 https://kasapvictor.github.io/weather-frontend/dist
