@@ -4,6 +4,11 @@
 }
 
 .cities__inner {
-  padding: 0 20px 20px 20px;
-  overflow: scroll;
+  padding: 0 20px;
+
+
+  @include media-desktop-m {
+    padding: 0 20px 20px;
+    overflow: scroll;
+  }
 }
