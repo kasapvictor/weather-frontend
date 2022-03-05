@@ -14,6 +14,9 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.1",
+    "@testing-library/dom": "^8.11.3",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.0",
     "eslint": "^8.4.1",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -22,30 +25,45 @@
     "jest": "^27.4.3",
     "parcel": "^2.0.1",
     "parcel-namer-rewrite": "^2.0.0-rc.1",
-    "posthtml": "^0.16.5",
+    "posthtml": "^0.16.6",
+    "posthtml-doctype": "^1.1.1",
     "posthtml-include": "^1.7.2",
     "sharp": "^0.29.3",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/dom": "^8.11.3",
-    "@testing-library/user-event": "^13.5.0"
+    "posthtml-beautify": "^0.7.0",
+    "prettier": "^2.4.0",
+    "jsdom": "^19.0.0"
   },
   "dependencies": {
     "axios": "^0.26.0",
     "dotenv": "^16.0.0",
-    "jsdom": "^19.0.0",
     "list.js": "^2.3.1",
     "lodash": "^4.17.21",
-    "on-change": "^4.0.0",
-    "prettier": "^2.4.0"
+    "on-change": "^4.0.0"
   },
   "posthtml": {
     "plugins": {
-      "posthtml-include": {}
+      "posthtml-include": {
+        "root": "./src"
+      },
+      "posthtml-doctype": {
+        "doctype": "HTML 5"
+      },
+      "posthtml-beautify": {
+        "rules": {
+          "indent": "tab",
+          "blankLines": false,
+          "sortAttr": false,
+          "eol": "\n",
+          "eof": "\n",
+          "maxlen": "120"
+        }
+      }
     }
   },
   "htmlnano": {
-    "collapseAttributeWhitespace": false,
-    "collapseBooleanAttributes": false,
+    "collapseAttributeWhitespace": true,
+    "minifyConditionalComments": true,
+    "collapseBooleanAttributes": true,
     "collapseWhitespace": false,
     "removeComments": true,
     "minifyJson": false,
@@ -100,8 +118,8 @@
     "rules": {
       "(.*)\\.(woff2?|ttf)": "fonts/$1.$2",
       "(.*)\\.(svg|png|gif|jpg|jpeg)": "img/$1.$2",
-      "(.*)\\.(css)": "css/styles.{hash}.$2",
-      "(.*)\\.(js)": "js/scripts.{hash}.$2"
+      "(.*)\\.(css)": "css/$1.{hash}.$2",
+      "(.*)\\.(js)": "js/$1.{hash}.$2"
     }
   },
   "jest": {
