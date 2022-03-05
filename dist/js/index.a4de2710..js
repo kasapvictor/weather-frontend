@@ -5014,12 +5014,12 @@ var renderTableHeader = function(state, elements, config) {
     var headerWrapper = elements.table.header;
     var emptyArray = new Array(config.days).fill(0);
     var cell = function(date) {
-        return " <div class=\"table__cell\">\n  <span class=\"text text--size-x text--weight-7 text--size-s\">".concat(date, "</span>\n  </div>");
+        return "\n    <div class=\"table__cell\">\n        <span class=\"text text--size-x text--weight-7 text--size-s\">".concat(date, "</span>\n    </div>");
     };
     var cells = emptyArray.map(function(item, index) {
         return cell(_getDateDefault.default(index));
     }).join('');
-    var row = "<div class=\"table__row table__header-row\">\n  <div class=\"table__cell\">\n  <span class=\"text text--size-x text--weight-7\">City</span>\n  </div>\n  ".concat(cells, "\n  </div>");
+    var row = "\n    <div class=\"table__row table__header-row\">\n        <div class=\"table__cell\">\n            <span class=\"text text--size-x text--weight-7\">City</span>\n        </div>\n        ".concat(cells, "\n    </div>");
     headerWrapper.innerHTML = '';
     headerWrapper.insertAdjacentHTML('afterbegin', row);
 };
@@ -5083,21 +5083,23 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var getDate = function(param) {
     var numberOfDay = param === void 0 ? 0 : param;
-    var number;
-    if (isNaN(Number(numberOfDay))) number = 0;
+    var config = {
+        numberOfDay: numberOfDay
+    };
     switch(true){
-        case isNaN(Number(numberOfDay)):
-            number = 0;
+        case Number.isNaN(Number(numberOfDay)):
+            config.numberOfDay = 0;
             break;
         case numberOfDay < 0:
-            number = 0;
+            config.numberOfDay = 0;
             break;
         default:
-            number = Math.abs(Math.floor(numberOfDay));
+            config.numberOfDay = Math.abs(Math.floor(numberOfDay));
+            break;
     }
     var today = new Date();
     var nextDay = new Date(today);
-    var date = nextDay.setDate(nextDay.getDate() + number);
+    var date = nextDay.setDate(nextDay.getDate() + config.numberOfDay);
     var newDate = new Date(date);
     return newDate.toLocaleDateString('RU', {
         year: '2-digit',
@@ -6713,4 +6715,4 @@ var utils = require('./../utils');
 
 },{"./../utils":"23n7J"}]},["2Lbqw","48AqN"], "48AqN", "parcelRequire0d7f")
 
-//# sourceMappingURL=scripts..js.map
+//# sourceMappingURL=index.a4de2710..js.map
