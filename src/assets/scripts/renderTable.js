@@ -20,17 +20,19 @@ const renderTableHeader = (state, elements, config) => {
   const headerWrapper = elements.table.header;
   const emptyArray = new Array(config.days).fill(0);
 
-  const cell = (date) => ` <div class="table__cell">
-  <span class="text text--size-x text--weight-7 text--size-s">${date}</span>
-  </div>`;
+  const cell = (date) => `
+    <div class="table__cell">
+        <span class="text text--size-x text--weight-7 text--size-s">${date}</span>
+    </div>`;
   const cells = emptyArray.map((item, index) => cell(getDate(index))).join('');
 
-  const row = `<div class="table__row table__header-row">
-  <div class="table__cell">
-  <span class="text text--size-x text--weight-7">City</span>
-  </div>
-  ${cells}
-  </div>`;
+  const row = `
+    <div class="table__row table__header-row">
+        <div class="table__cell">
+            <span class="text text--size-x text--weight-7">City</span>
+        </div>
+        ${cells}
+    </div>`;
 
   headerWrapper.innerHTML = '';
   headerWrapper.insertAdjacentHTML('afterbegin', row);
@@ -47,7 +49,6 @@ const renderTableBody = (state, watchedState, elements) => {
     const tempText = document.createElement('span');
     tempText.classList.add('text', textCls);
     tempText.innerText = data;
-
     tableCell.append(tempText);
 
     if (ico !== '') {
@@ -68,7 +69,6 @@ const renderTableBody = (state, watchedState, elements) => {
       row.dataset.rowCity = item.id;
 
       const cellName = cell(item.name);
-
       const cells = item.data.map((dayWeather) => {
         const icoSrc = `https://openweathermap.org/img/wn/${dayWeather.ico}.png`;
         const temp = `${dayWeather.temp.toFixed(1)}°C`;
