@@ -1,3 +1,10 @@
+
+# Link
+
+https://kasapvictor.github.io/weather-frontend/dist
+
+----
+
 # Task
 Создать сайт, выводящий погоду в определенных (на Ваш выбор) городах.
 1 страница, стилизация вольная, мобилка не нужна. Использовать https://openweathermap.org/current API.
