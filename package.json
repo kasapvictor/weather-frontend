@@ -24,11 +24,15 @@
     "parcel-namer-rewrite": "^2.0.0-rc.1",
     "posthtml": "^0.16.5",
     "posthtml-include": "^1.7.2",
-    "sharp": "^0.29.3"
+    "sharp": "^0.29.3",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/dom": "^8.11.3",
+    "@testing-library/user-event": "^13.5.0"
   },
   "dependencies": {
     "axios": "^0.26.0",
     "dotenv": "^16.0.0",
+    "jsdom": "^19.0.0",
     "list.js": "^2.3.1",
     "lodash": "^4.17.21",
     "on-change": "^4.0.0",
@@ -101,6 +105,6 @@
     }
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "jsdom"
   }
 }

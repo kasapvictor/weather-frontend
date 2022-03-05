@@ -1,16 +1,4 @@
-const getDate = (numberOfDay = 0) => {
-  // 26.02.22
-  const today = new Date();
-  const nextDay = new Date(today);
-  const date = nextDay.setDate(nextDay.getDate() + numberOfDay); // 1645974081243
-  const newDate = new Date(date);
-
-  return newDate.toLocaleDateString('RU', {
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-  });
-};
+import getDate from './getDate';
 
 const rowRemove = (button, state, watchedState) => {
   const watched = watchedState;
