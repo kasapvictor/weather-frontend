@@ -122,7 +122,7 @@ input {
 }
 @media (max-width: 767px) {
   .title-h1 {
-    font-size: 6rem;
+    font-size: 4rem;
   }
 }
 @media (max-width: 320px) {
@@ -144,17 +144,17 @@ input {
 .title-h3 {
   font-size: 2.8rem;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.3;
   font-family: inherit;
 }
 @media (max-width: 375px) {
   .title-h3 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 @media (max-width: 320px) {
   .title-h3 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 .title-h4 {
@@ -165,7 +165,7 @@ input {
 }
 @media (max-width: 320px) {
   .title-h4 {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
   }
 }
 .text {
@@ -388,5 +388,14 @@ input {
 .cities {
   padding-top: 30px;
   padding-bottom: 60px;
+}
+.cities__inner {
+  padding: 0 20px;
+}
+@media (max-width: 1280px) {
+  .cities__inner {
+    padding: 0 20px 20px;
+    overflow: scroll;
+  }
 }
 /*# sourceMappingURL=styles.493f5aae..css.map */
