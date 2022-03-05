@@ -2,6 +2,7 @@
   width: 100%;
   max-width: $desktop-m;
   margin: 0 auto;
+  padding: 0 20px;
 
   @include media-desktop-m {
     padding: 0 30px;
